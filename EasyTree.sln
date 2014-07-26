@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTree", "Src\HierarchyHelper\EasyTree.csproj", "{C3678C7B-24A8-4555-94ED-292A4847B37D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTree", "Src\EasyTree\EasyTree.csproj", "{C3678C7B-24A8-4555-94ED-292A4847B37D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTree.Tests", "Src\HierarchyHelper.Tests\EasyTree.Tests.csproj", "{CF493E28-2EDD-41A3-9B5E-94047D09985A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTree.Tests", "Src\EasyTree.Tests\EasyTree.Tests.csproj", "{CF493E28-2EDD-41A3-9B5E-94047D09985A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F05D651D-4AEC-4646-A79A-CCE8B00E3FB0}"
 	ProjectSection(SolutionItems) = preProject
