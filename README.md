@@ -9,8 +9,8 @@ What makes this library even more powerful is once the hierarchy is flattened in
 
 TreeTraversalExtensions consists of two extension methods `ToEnumerable` and `ForEach`.
 
-ToEnumerable()
---------------
+Getting Started
+---------------
 
 Say you have the simple tree node type below.
 
@@ -92,7 +92,9 @@ You can traverse the hiearchy either depth-first (default) or breadth-first.
     items = rootTreeNode.ToEnumerable(TraversalType.BreadthFirst, n => n.ChildItems);
 ```
 
+You can also perform an action at each node using `ForEach`.
 
-
-
-
+```CSharp
+    // Perform some logic at each node.
+    var items = rootTreeNode.ForEach(n => n.ChildItems, n => DoSomething(n));
+```
