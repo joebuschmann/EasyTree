@@ -2,109 +2,308 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace HierarchyHelper.Tests
+namespace TreeTraversalExtensions.Tests
 {
     [TestFixture]
     public class HierarchyExtensionsFixture
     {
         [Test]
-        public void ValidateDepthFirstTraversal()
+        public void ValidateDepthFirstTraversalSingleRoot()
         {
-            var rootHierarchyItem = new HierarchyItem(1,
-                new List<HierarchyItem>()
+            var rootTreeNode = new TreeNode(1,
+                new List<TreeNode>()
                 {
-                    new HierarchyItem(2,
-                        new List<HierarchyItem>()
+                    new TreeNode(2,
+                        new List<TreeNode>()
                         {
-                            new HierarchyItem(3),
-                            new HierarchyItem(4),
-                            new HierarchyItem(5)
+                            new TreeNode(3),
+                            new TreeNode(4),
+                            new TreeNode(5)
                         }),
-                    new HierarchyItem(6,
-                        new List<HierarchyItem>()
+                    new TreeNode(6,
+                        new List<TreeNode>()
                         {
-                            new HierarchyItem(7),
-                            new HierarchyItem(8),
-                            new HierarchyItem(9)
+                            new TreeNode(7),
+                            new TreeNode(8),
+                            new TreeNode(9)
                         }),
-                    new HierarchyItem(10,
-                        new List<HierarchyItem>()
+                    new TreeNode(10,
+                        new List<TreeNode>()
                         {
-                            new HierarchyItem(11),
-                            new HierarchyItem(12),
-                            new HierarchyItem(13)
+                            new TreeNode(11),
+                            new TreeNode(12),
+                            new TreeNode(13)
                         }),
                 });
 
-            var hierarchyItems = rootHierarchyItem.ToEnumerable(i => i.ChildItems);
-
-            Assert.That(hierarchyItems.Count(), Is.EqualTo(13));
-
-            int index = 1;
-
-            foreach (var hierarchyItem in hierarchyItems)
-                Assert.That(hierarchyItem.Index, Is.EqualTo(index++));
+            var TreeNodes = rootTreeNode.ToEnumerable(i => i.ChildItems);
+            CollectionAssert.AreEqual(Enumerable.Range(1, 13), TreeNodes.Select(i => i.Index));
         }
 
         [Test]
-        public void ValidateBreadthFirstTraversal()
+        public void ValidateDepthFirstTraversalMultipleRoot()
         {
-            var rootHierarchyItem = new HierarchyItem(1,
-                new List<HierarchyItem>()
+            var rootTreeNode1 = new TreeNode(1,
+                new List<TreeNode>()
                 {
-                    new HierarchyItem(2,
-                        new List<HierarchyItem>()
+                    new TreeNode(2,
+                        new List<TreeNode>()
                         {
-                            new HierarchyItem(5),
-                            new HierarchyItem(6),
-                            new HierarchyItem(7)
-                        }),
-                    new HierarchyItem(3,
-                        new List<HierarchyItem>()
-                        {
-                            new HierarchyItem(8),
-                            new HierarchyItem(9),
-                            new HierarchyItem(10)
-                        }),
-                    new HierarchyItem(4,
-                        new List<HierarchyItem>()
-                        {
-                            new HierarchyItem(11),
-                            new HierarchyItem(12),
-                            new HierarchyItem(13)
+                            new TreeNode(3),
+                            new TreeNode(4),
+                            new TreeNode(5)
                         }),
                 });
 
-            var hierarchyItems = rootHierarchyItem.ToEnumerable(TraversalType.BreadthFirst, i => i.ChildItems);
+            var rootTreeNode2 = new TreeNode(6,
+                new List<TreeNode>()
+                {
+                    new TreeNode(7,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(8),
+                            new TreeNode(9),
+                            new TreeNode(10)
+                        }),
+                });
 
-            Assert.That(hierarchyItems.Count(), Is.EqualTo(13));
+            var rootTreeNodes = new List<TreeNode>() {rootTreeNode1, rootTreeNode2};
+            var TreeNodes = rootTreeNodes.ToEnumerable(i => i.ChildItems);
 
-            int index = 1;
-
-            foreach (var hierarchyItem in hierarchyItems)
-                Assert.That(hierarchyItem.Index, Is.EqualTo(index++));
+            CollectionAssert.AreEqual(Enumerable.Range(1, 10), TreeNodes.Select(i => i.Index));
         }
 
-        private class HierarchyItem
+        [Test]
+        public void ValidateBreadthFirstTraversalSingleRoot()
         {
-            private readonly int _index;
-            private readonly IEnumerable<HierarchyItem> _childItems;
+            var rootTreeNode = new TreeNode(1,
+                new List<TreeNode>()
+                {
+                    new TreeNode(2,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(5),
+                            new TreeNode(6),
+                            new TreeNode(7)
+                        }),
+                    new TreeNode(3,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(8),
+                            new TreeNode(9),
+                            new TreeNode(10)
+                        }),
+                    new TreeNode(4,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(11),
+                            new TreeNode(12),
+                            new TreeNode(13)
+                        }),
+                });
 
-            public HierarchyItem(int index, IEnumerable<HierarchyItem> childItems = null)
-            {
-                _index = index;
-                _childItems = childItems == null ? Enumerable.Empty<HierarchyItem>() : childItems.ToList();
-            }
+            var TreeNodes = rootTreeNode.ToEnumerable(TraversalType.BreadthFirst, i => i.ChildItems);
 
-            public int Index
-            {
-                get { return _index; }
-            }
+            CollectionAssert.AreEqual(Enumerable.Range(1, 13), TreeNodes.Select(i => i.Index));
+        }
 
-            public IEnumerable<HierarchyItem> ChildItems
-            {
-                get { return _childItems; }
-            }
+        [Test]
+        public void ValidateBreadthFirstTraversalMultipleRoot()
+        {
+            var rootTreeNode1 = new TreeNode(1,
+                new List<TreeNode>()
+                {
+                    new TreeNode(2,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(4),
+                            new TreeNode(5),
+                            new TreeNode(6)
+                        }),
+                    new TreeNode(3,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(7),
+                            new TreeNode(8),
+                            new TreeNode(9)
+                        }),
+                });
+
+            var rootTreeNode2 = new TreeNode(10,
+                new List<TreeNode>()
+                {
+                    new TreeNode(11,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(13),
+                            new TreeNode(14),
+                            new TreeNode(15)
+                        }),
+                    new TreeNode(12,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(16),
+                            new TreeNode(17),
+                            new TreeNode(18)
+                        }),
+                });
+
+            var rootTreeNodes = new List<TreeNode>() { rootTreeNode1, rootTreeNode2 };
+            var TreeNodes = rootTreeNodes.ToEnumerable(TraversalType.BreadthFirst, i => i.ChildItems);
+
+            CollectionAssert.AreEqual(Enumerable.Range(1, 18), TreeNodes.Select(i => i.Index));
+        }
+
+        [Test]
+        public void ValidateDepthFirstForEachSingleRoot()
+        {
+            var rootTreeNode = new TreeNode(1,
+                new List<TreeNode>()
+                {
+                    new TreeNode(2,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(3),
+                            new TreeNode(4),
+                            new TreeNode(5)
+                        }),
+                    new TreeNode(6,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(7),
+                            new TreeNode(8),
+                            new TreeNode(9)
+                        }),
+                    new TreeNode(10,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(11),
+                            new TreeNode(12),
+                            new TreeNode(13)
+                        }),
+                });
+
+            var results = new List<int>();
+            rootTreeNode.ForEach(i => i.ChildItems, i => results.Add(i.Index));
+
+            CollectionAssert.AreEqual(Enumerable.Range(1, 13), results);
+        }
+
+        [Test]
+        public void ValidateDepthFirstForEachMultipleRoot()
+        {
+            var rootTreeNode1 = new TreeNode(1,
+                new List<TreeNode>()
+                {
+                    new TreeNode(2,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(3),
+                            new TreeNode(4),
+                            new TreeNode(5)
+                        }),
+                });
+
+            var rootTreeNode2 = new TreeNode(6,
+                new List<TreeNode>()
+                {
+                    new TreeNode(7,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(8),
+                            new TreeNode(9),
+                            new TreeNode(10)
+                        }),
+                });
+
+            var results = new List<int>();
+            var rootTreeNodes = new List<TreeNode>() { rootTreeNode1, rootTreeNode2 };
+            rootTreeNodes.ForEach(i => i.ChildItems, i => results.Add(i.Index));
+
+            CollectionAssert.AreEqual(Enumerable.Range(1, 10), results);
+        }
+
+        [Test]
+        public void ValidateBreadthFirstForEachSingleRoot()
+        {
+            var rootTreeNode = new TreeNode(1,
+                new List<TreeNode>()
+                {
+                    new TreeNode(2,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(5),
+                            new TreeNode(6),
+                            new TreeNode(7)
+                        }),
+                    new TreeNode(3,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(8),
+                            new TreeNode(9),
+                            new TreeNode(10)
+                        }),
+                    new TreeNode(4,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(11),
+                            new TreeNode(12),
+                            new TreeNode(13)
+                        }),
+                });
+
+            var results = new List<int>();
+            rootTreeNode.ForEach(TraversalType.BreadthFirst, i => i.ChildItems, i => results.Add(i.Index));
+
+            CollectionAssert.AreEqual(Enumerable.Range(1, 13), results);
+        }
+
+        [Test]
+        public void ValidateBreadthFirstForEachMultipleRoot()
+        {
+            var rootTreeNode1 = new TreeNode(1,
+                new List<TreeNode>()
+                {
+                    new TreeNode(2,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(4),
+                            new TreeNode(5),
+                            new TreeNode(6)
+                        }),
+                    new TreeNode(3,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(7),
+                            new TreeNode(8),
+                            new TreeNode(9)
+                        }),
+                });
+
+            var rootTreeNode2 = new TreeNode(10,
+                new List<TreeNode>()
+                {
+                    new TreeNode(11,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(13),
+                            new TreeNode(14),
+                            new TreeNode(15)
+                        }),
+                    new TreeNode(12,
+                        new List<TreeNode>()
+                        {
+                            new TreeNode(16),
+                            new TreeNode(17),
+                            new TreeNode(18)
+                        }),
+                });
+
+            var results = new List<int>();
+            var rootTreeNodes = new List<TreeNode>() { rootTreeNode1, rootTreeNode2 };
+            rootTreeNodes.ForEach(TraversalType.BreadthFirst, i => i.ChildItems, i => results.Add(i.Index));
+
+            CollectionAssert.AreEqual(Enumerable.Range(1, 18), results);
         }
     }
 }

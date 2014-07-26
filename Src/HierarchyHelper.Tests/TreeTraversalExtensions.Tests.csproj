@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="HierarchyExtensionsFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadmeSamples.cs" />
+    <Compile Include="TreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

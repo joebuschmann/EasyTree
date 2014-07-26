@@ -36,6 +36,30 @@ public static class HierarchyExtensions
         return hierarchyItem.ToEnumerable(TraversalType.DepthFirst, getChildrenFunc);
     }
 
+    public static void ForEach<T>(this IEnumerable<T> hierarchyItems, TraversalType traversalType, Func<T, IEnumerable<T>> getChildrenFunc, Action<T> action)
+    {
+        foreach (var hierarchyItem in hierarchyItems.ToEnumerable(traversalType, getChildrenFunc))
+            action(hierarchyItem);
+    }
+
+    public static void ForEach<T>(this IEnumerable<T> hierarchyItems, Func<T, IEnumerable<T>> getChildrenFunc, Action<T> action)
+    {
+        foreach (var hierarchyItem in hierarchyItems.ToEnumerable(getChildrenFunc))
+            action(hierarchyItem);
+    }
+
+    public static void ForEach<T>(this T hierarchyItem, TraversalType traversalType, Func<T, IEnumerable<T>> getChildrenFunc, Action<T> action)
+    {
+        foreach (var item in hierarchyItem.ToEnumerable(traversalType, getChildrenFunc))
+            action(item);
+    }
+
+    public static void ForEach<T>(this T hierarchyItem, Func<T, IEnumerable<T>> getChildrenFunc, Action<T> action)
+    {
+        foreach (var item in hierarchyItem.ToEnumerable(getChildrenFunc))
+            action(item);
+    }
+
     private static ITraversalStrategy<T> GetTraversalStrategy<T>(TraversalType traversalType, Func<T, IEnumerable<T>> getChildrenFunc)
     {
         switch (traversalType)
