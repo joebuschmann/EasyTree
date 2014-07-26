@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("HierarchyHelper")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("CSG Systems, Inc")]
+[assembly: AssemblyCompany("Joe Buschmann")]
 [assembly: AssemblyProduct("HierarchyHelper")]
-[assembly: AssemblyCopyright("Copyright © CSG Systems, Inc 2014")]
+[assembly: AssemblyCopyright("Copyright © Joe Buschmann 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
