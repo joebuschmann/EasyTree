@@ -2,7 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace TreeTraversalExtensions.Tests
+namespace EasyTree.Tests
 {
     [TestFixture]
     public class ReadmeSamples

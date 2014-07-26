@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace HierarchyHelper
+namespace EasyTree
 {
     internal interface ITraversalStrategy<T>
     {

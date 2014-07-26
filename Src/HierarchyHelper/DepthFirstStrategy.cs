@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HierarchyHelper
+namespace EasyTree
 {
     internal class DepthFirstStrategy<T> : ITraversalStrategy<T>
     {

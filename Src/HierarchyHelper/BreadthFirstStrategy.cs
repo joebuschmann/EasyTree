@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HierarchyHelper
+namespace EasyTree
 {
     internal class BreadthFirstStrategy<T> : ITraversalStrategy<T>
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace TreeTraversalExtensions.Tests
+namespace EasyTree.Tests
 {
     public class TreeNode
     {

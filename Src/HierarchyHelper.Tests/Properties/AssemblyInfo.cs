@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("HierarchyHelper.Tests")]
+[assembly: AssemblyTitle("EasyTree.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Joe Buschmann")]
-[assembly: AssemblyProduct("HierarchyHelper.Tests")]
+[assembly: AssemblyProduct("EasyTree.Tests")]
 [assembly: AssemblyCopyright("Copyright © Joe Buschmann 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

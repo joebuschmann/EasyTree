@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HierarchyHelper;
+using EasyTree;
 
 // ReSharper disable once CheckNamespace
 public static class HierarchyExtensions
