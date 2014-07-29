@@ -1,9 +1,9 @@
 EasyTree
 ========
 
-EasyTree is a small .NET library written in C# that converts any tree or hierarchal data structure into an enumerable list. It abstracts away the boilerplate recursive code you have to write to get at each node in a hierarchy.
+EasyTree is a small .NET library written in C# that converts any tree or hierarchal data structure into an enumerable list. It abstracts away the boilerplate recursive code to get at each node in a hierarchy.
 
-EasyTree is useful if you find yourself writing virtually the same recursive methods over and over where the only differences are the action to perform at each node and where to get the child items. EasyTree handles the recursive piece of your code and lets you focus on the business logic. It works with any data type and you just tell it where to get the child items.
+EasyTree is useful if you find yourself writing virtually the same recursive methods over and over where the only differences are the action to perform at each node and where to get the child items. EasyTree handles the recursive piece of your code and lets you focus on the business logic. It works with any data type, and you just tell it where to get the child items.
 
 What makes this library even more powerful is once the hierarchy is flattened into an enumerable list, the full power of the LINQ library is availble for you to use. You can do searches with Where(), First(), or Any() or transform the data with Select(), GroupBy(), and Join().
 
